@@ -93,6 +93,9 @@ section{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index: 1000;
 }
 
 .header .header-1 .logo{
@@ -174,7 +177,7 @@ section{
 
 .header .header-2.active{
     position:fixed;
-    top:0; left:0; right:0;
+    top:80px; left:0; right:0;
     z-index: 1000;
 
 }
@@ -688,7 +691,7 @@ section{
     color:#fff;
     background:var(--green);
     margin:0 .3rem;
-    border-radius: 50%; 
+    border-radius: 50%;
 }
 
 .footer .share a:hover{
@@ -764,6 +767,7 @@ section{
 
     body{
         padding-bottom: 6rem;
+
     }
 
     .header .header-2{

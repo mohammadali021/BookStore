@@ -1,5 +1,6 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models import Model
 from django.utils.text import slugify
 
 
@@ -30,6 +31,7 @@ class Product(models.Model):
     new_book = models.BooleanField(default=False ,verbose_name='کتاب جدید؟')
     best_book = models.BooleanField(default=False ,verbose_name='کتاب برجسته؟')
     score = models.IntegerField(default=0 , validators=(MaxValueValidator(6) , MinValueValidator(0)))
+    unfill_score = models.IntegerField(default=0)
     Inventory = models.BooleanField(default=True  , verbose_name='موجودی')
     count = models.IntegerField(default=0)
     image = models.ImageField(upload_to='products/', null=True, blank=True)
@@ -40,11 +42,20 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(f"{str(self.name)}-{str(self.price)}")
+        self.unfill_score = 6-self.score
         super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'محصولات'
         verbose_name_plural = 'محصول'
+
+class Site_banner(models.Model):
+    image = models.ImageField(upload_to='banners/', null=True, blank=True , verbose_name='تصویر کتب موجود در بنر')
+    def __str__(self):
+        return self.image.name
+    class Meta:
+        verbose_name = "تصاویر کتب بنر"
+        verbose_name_plural = "تصاویر کتب بنر"
 
 
 

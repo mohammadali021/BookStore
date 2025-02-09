@@ -2,7 +2,7 @@ from multiprocessing.resource_tracker import register
 
 from django.contrib import admin,messages
 
-from Shops.models import Category, Product
+from Shops.models import Category, Product, Site_banner
 
 
 @admin.register(Category)
@@ -14,6 +14,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ['category','name' , 'price' ,'count','best_book' , 'new_book']
     list_editable = ['price' , 'count']
     prepopulated_fields = {'slug': ('name',)}
+    readonly_fields = ['unfill_score']
 
     def save_model(self, request, obj, form, change):
         if obj.score < 0 or obj.score > 6:
@@ -21,3 +22,6 @@ class ProductAdmin(admin.ModelAdmin):
         else:
             super().save_model(request, obj, form, change)
 
+@admin.register(Site_banner)
+class Site_bannerAdmin(admin.ModelAdmin):
+    list_display = ['image']
