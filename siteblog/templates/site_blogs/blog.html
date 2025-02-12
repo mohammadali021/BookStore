@@ -1,0 +1,42 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block content_block %}
+
+
+    <div class="bardia" style="background-color: #f2f2f2; text-align: right; width: 88%; max-width: 1000px; padding: 20px; border-radius: 50px; margin: 0 auto; display: block;margin-top: 90px;box-shadow: -8px -8px 8px rgba(33, 145, 80, 0.5);" >
+        <br>
+        <br>
+        <br>
+
+
+            <h1>{{ post.title }}</h1>
+            <div class="ql-editor" style="font-size:15px">
+        {{ post.content.html|safe }}
+    </div>
+</div>
+
+{% endblock %}
+{% block javascript %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const images = document.querySelectorAll('.ql-editor img');
+
+        images.forEach(img => {
+            img.style.maxWidth = '100%';
+            img.style.width = '600px';
+            img.style.height = 'auto';
+            img.style.display = 'block';
+            img.style.marginLeft = 'auto';
+            img.style.marginRight = 'auto';
+            img.style.borderRadius = '18px';
+            img.style.marginTop = '15px';
+            img.style.marginBottom = '15px';
+        });
+        const textElements = document.querySelectorAll('.ql-editor p, .ql-editor div, .ql-editor span, .ql-editor h1, .ql-editor h2, .ql-editor h3');
+        textElements.forEach(element => {
+            element.style.lineHeight = '2'; // فاصله بین خطوط را ۲ برابر می‌کند (مقدار دلخواه)
+        });
+    });
+</script>
+{% endblock %}

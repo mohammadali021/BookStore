@@ -22,5 +22,10 @@ from BookStore import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Shops.urls')),
-]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('blog/' , include('siteblog.urls')),
+    path('tinymce/' , include('tinymce.urls'))
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

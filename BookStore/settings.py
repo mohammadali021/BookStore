@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,8 +39,31 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Shops'
+    'Shops',
+    'tinymce',
+    'django_quill',
+    'siteblog',
+    'django_extensions'
+
 ]
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 500,  # ارتفاع ویرایشگر
+    'width': '80%',  # عرض ویرایشگر
+    'menubar': True,
+    'plugins': 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+    'toolbar': 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
+    'cleanup_on_startup': False,
+    'custom_undo_redo_levels': 10,
+}
+
+# CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor'
+# CKEDITOR_UPLOAD_PATH = 'uploads/'
+# CKEDITOR_CONFIGS={
+#     'default':{
+#         'toolbar':'full'
+#     }
+# }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -110,6 +135,7 @@ LANGUAGE_CODE = 'fa-ir'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+USE_L10N = True
 
 USE_TZ = True
 

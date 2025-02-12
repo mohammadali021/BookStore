@@ -74,7 +74,7 @@
 {% block best_Book_Block %}
     <section class="featured" id="featured">
 
-        <h1 class="heading"><span>کتابهای برجسته</span></h1>
+        <h1 class="heading"><span>کتاب های برجسته</span></h1>
 
         <div class="swiper featured-slider">
 
@@ -99,17 +99,17 @@
                                         {% for i in range %}
                                             <i class="fas fa-star"></i>
                                         {% endfor %}
-                                {% endwith %}
+                                    {% endwith %}
                                     {% with ''|center:Item.unfill_score as range %}
 
                                         {% for i in range %}
                                             <i class="far fa-star"></i>
 
                                         {% endfor %}
-                                {% endwith %}
+                                    {% endwith %}
 
 
-{#                                    <i class="fas fa-star-half-alt"></i>#}
+                                    {#                                    <i class="fas fa-star-half-alt"></i>#}
                                 </div>
 
 
@@ -124,227 +124,51 @@
         </div>
     </section>
 
-{% endblock %}
 
 
-<section class="arrivals" id="arrivals">
+    <section class="arrivals" id="arrivals">
 
-    <h1 class="heading"><span>کتابهای جدید</span></h1>
+        <h1 class="heading"><span>کتاب های جدید</span></h1>
 
-    <div class="swiper arrivals-slider">
+        <div class="swiper arrivals-slider">
 
-        <div class="swiper-wrapper">
-            {% for item in books %}
-                <a href="#" class="swiper-slide box">
-                    <div class="image">
-                        <img src="image/book-1.png" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>تازه رسیده ها</h3>
-                        <div class="price">5 هزارتومان <span>10 هزارتومان</span></div>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
+            <div class="swiper-wrapper">
+                {% for book in books %}
+                    {% if book.new_book == True %}
 
-            <a href="#" class="swiper-slide box">
-                <div class="image">
-                    <img src="image/book-2.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>تازه رسیده ها</h3>
-                    <div class="price">5 هزارتومان <span>10 هزارتومان</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </a>
+                        <a href="#" class="swiper-slide box">
+                            <div class="image">
+                                <img src="media/{{ book.image }}" alt="">
+                            </div>
+                            <div class="content">
+                                <h3>{{ book.name }}</h3>
+                                {% if book.discount %}
+                                    <div class="price">{{ book.price }} هزارتومان <span>{{ book.discount_price }} هزارتومان</span>
+                                    </div>
+                                {% else %}
+                                    <div class="price">{{ book.price }} هزارتومان</div>
 
-            <a href="#" class="swiper-slide box">
-                <div class="image">
-                    <img src="image/book-3.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>تازه رسیده ها</h3>
-                    <div class="price">5 هزارتومان <span>10 هزارتومان</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </a>
+                                {% endif %}
+                                <div class="stars">
+                                    {% with ''|center:book.score as range %}
+                                        {% for star in range %}
+                                            <i class="fas fa-star"></i>
+                                        {% endfor %}
+                                    {% endwith %}
+                                    {% with ''|center:book.unfill_score as range %}
+                                        {% for star in range %}
+                                            <i class="far fa-star"></i>
+                                        {% endfor %}
+                                    {% endwith %}
+                                </div>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+    </section>
 
-            <a href="#" class="swiper-slide box">
-                <div class="image">
-                    <img src="image/book-4.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>تازه رسیده ها</h3>
-                    <div class="price">5 هزارتومان <span>10 هزارتومان</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </a>
 
-            <a href="#" class="swiper-slide box">
-                <div class="image">
-                    <img src="image/book-5.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>تازه رسیده ها</h3>
-                    <div class="price">5 هزارتومان <span>10 هزارتومان</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </a>
-
-        </div>
-
-    </div>
-
-    <div class="swiper arrivals-slider">
-
-        <div class="swiper-wrapper">
-
-            <a href="#" class="swiper-slide box">
-                <div class="image">
-                    <img src="image/book-6.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>تازه رسیده ها</h3>
-                    <div class="price">5 هزارتومان <span>10 هزارتومان</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="swiper-slide box">
-                <div class="image">
-                    <img src="image/book-7.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>تازه رسیده ها</h3>
-                    <div class="price">5 هزارتومان <span>10 هزارتومان</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="swiper-slide box">
-                <div class="image">
-                    <img src="image/book-8.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>تازه رسیده ها</h3>
-                    <div class="price">5 هزارتومان <span>10 هزارتومان</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="swiper-slide box">
-                <div class="image">
-                    <img src="image/book-9.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>تازه رسیده ها</h3>
-                    <div class="price">5 هزارتومان <span>10 هزارتومان</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="swiper-slide box">
-                <div class="image">
-                    <img src="image/book-10.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>تازه رسیده ها</h3>
-                    <div class="price">5 هزارتومان <span>10 هزارتومان</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- arrivals section ends -->
-
-<!-- deal section starts  -->
-
-<section class="deal">
-
-    <div class="content">
-        <h3>معامله روز</h3>
-        <h1>تا 50٪ تخفیف</h1>
-        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون
-            بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است </p>
-        <a href="#" class="btn">اکنون خرید کنید</a>
-    </div>
-
-    <div class="image">
-        <img src="image/deal-img.jpg" alt="">
-    </div>
-
-</section>
-
-<!-- deal section ends -->
-
-<!-- reviews section starts  -->
-
-<section class="reviews" id="reviews">
+    <section class="reviews" id="reviews">
 
     <h1 class="heading"><span>نظرات مشتریان</span></h1>
 
@@ -365,168 +189,38 @@
                     <i class="fas fa-star-half-alt"></i>
                 </div>
             </div>
-
-            <div class="swiper-slide box">
-                <img src="image/pic-2.png" alt="">
-                <h3>نام مشتری</h3>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و
-                    متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است </p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <img src="image/pic-3.png" alt="">
-                <h3>نام مشتری</h3>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و
-                    متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است </p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-            </div>
-            <div class="swiper-slide box">
-                <img src="image/pic-4.png" alt="">
-                <h3>نام مشتری</h3>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و
-                    متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است </p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <img src="image/pic-5.png" alt="">
-                <h3>نام مشتری</h3>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و
-                    متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است </p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <img src="image/pic-6.png" alt="">
-                <h3>نام مشتری</h3>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و
-                    متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است </p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-            </div>
-
         </div>
-
     </div>
-
 </section>
 
-<!-- reviews section ends -->
-
-<!-- blogs section starts  -->
-
-<section class="blogs" id="blogs">
+    <section class="blogs" id="blogs">
 
     <h1 class="heading"><span>وبلاگ</span></h1>
 
     <div class="swiper blogs-slider">
-
         <div class="swiper-wrapper">
-
-            <div class="swiper-slide box">
+            {% for blog in blog %}
+            <div class="swiper-slide box" style="height: 400px">
                 <div class="image">
-                    <img src="image/blog-1.jpg" alt="">
+                    <img src="media/{{ blog.image}}" alt="">
                 </div>
                 <div class="content">
-                    <h3>عنوان متن در اینجا</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                    <a href="#" class="btn">مطالعه بیشتر</a>
+                    <h3>{{ blog.title}}</h3>
+                    <a href="{% url 'blog' slug=blog.slug3 %}" class="btn" id="card_btn">مطالعه بیشتر</a>
                 </div>
             </div>
-
-            <div class="swiper-slide box">
-                <div class="image">
-                    <img src="image/blog-2.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>عنوان متن در اینجا</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                    <a href="#" class="btn">مطالعه بیشتر</a>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <div class="image">
-                    <img src="image/blog-3.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>عنوان متن در اینجا</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                    <a href="#" class="btn">مطالعه بیشتر</a>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <div class="image">
-                    <img src="image/blog-4.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>عنوان متن در اینجا</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                    <a href="#" class="btn">مطالعه بیشتر</a>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <div class="image">
-                    <img src="image/blog-5.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>عنوان متن در اینجا</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است </p>
-                    <a href="#" class="btn">مطالعه بیشتر</a>
-                </div>
-            </div>
-
+            {% endfor %}
         </div>
-
     </div>
-
 </section>
 
-<!-- blogs section ends -->
 
-<!-- footer section starts  -->
+{% endblock %}
 
-
-<!-- footer section ends -->
-
-<!-- loader  -->
-
-<div class="loader-container">
-    <img src="image/loader-img.gif" alt="">
-</div>
-
+{% block javascript %}
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script src="{% static 'Shops/js/script.js' %}"></script>
+{% endblock %}
 
 </body>
 </html>

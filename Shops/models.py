@@ -60,3 +60,6 @@ class Site_banner(models.Model):
 
 
 
+
+
+

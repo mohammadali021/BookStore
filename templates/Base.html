@@ -43,7 +43,7 @@
 
         <div class="header-2">
             <nav class="navbar">
-                <a href="#home">خانه</a>
+                <a href="{% url 'home' %}">خانه</a>
                 <a href="#featured">ویژه</a>
                 <a href="#arrivals">جدیدها</a>
                 <a href="#reviews">نظرات</a>
@@ -55,6 +55,8 @@
 {% endblock %}
 {% block banner_block %}
 
+{% endblock %}
+{% block content_block %}
 {% endblock %}
 {% block icons_block %}
 
@@ -96,8 +98,9 @@
 
 {% endblock %}
 {% block footer_block %}
-    <section class="footer">
 
+    <section class="footer">
+        <hr>
         <div class="box-container">
 
             <div class="box">
@@ -111,28 +114,20 @@
             </div>
 
             <div class="box">
-                <h3>quick links</h3>
-                <a href="#"> <i class="fas fa-arrow-right"></i> خانه </a>
+                <h3>میانبر</h3>
+                <a href="{% url 'home' %}"> <i class="fas fa-arrow-right"></i> خانه </a>
                 <a href="#"> <i class="fas fa-arrow-right"></i> ویژه </a>
                 <a href="#"> <i class="fas fa-arrow-right"></i> برجسته </a>
                 <a href="#"> <i class="fas fa-arrow-right"></i> نظرات </a>
                 <a href="#"> <i class="fas fa-arrow-right"></i> وبلاگ </a>
             </div>
 
-            <div class="box">
-                <h3>extra links</h3>
-                <a href="#"> <i class="fas fa-arrow-right"></i> حساب کاربری </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> اقلام سفارش داده شده </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> قوانین </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> روش پرداخت </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> دیگر سرویس ها </a>
-            </div>
 
             <div class="box">
-                <h3>contact info</h3>
-                <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
-                <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
-                <a href="#"> <i class="fas fa-envelope"></i> admin@netcopy.ir </a>
+                <h3>تماس با ما</h3>
+                <a href="#"> <i class="fas fa-phone"></i> 021-11223344 </a>
+                <a href="#"> <i class="fas fa-phone"></i> 0912-3456789 </a>
+                <a href="#"> <i class="fas fa-envelope"></i> bookstore@store.ir </a>
                 <img src="{% static 'Shops/image/worldmap.png' %}" class="map" alt="">
             </div>
 
@@ -146,7 +141,7 @@
             <a href="#" class="fab fa-pinterest"></a>
         </div>
 
-        <div class="credit"> فارسی و راست چین شده توسط <a href="https://netcopy.ir"><span>نت کپی</span></a></div>
+        <div class="credit">کتابخانه ایران </div>
 
     </section>
 
@@ -155,5 +150,7 @@
     <!-- custom js file link  -->
     <script src="{% static 'Shops/js/script.js' %}"></script>
 {% endblock %}
+{% block javascript %}
 
+{% endblock %}
 
