@@ -13,12 +13,12 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['category','name' , 'price' ,'count','best_book' , 'new_book']
     list_editable = ['price' , 'count']
-    prepopulated_fields = {'slug': ('name',)}
-    readonly_fields = ['unfill_score']
+    # prepopulated_fields = {'slug': ('token',)}
+    readonly_fields = ['unfill_score', 'slug']
 
     def save_model(self, request, obj, form, change):
         if obj.score < 0 or obj.score > 6:
-            messages.error(request, 'قیمت باید بین  0 و 6 باشد')
+            messages.error(request, 'امتیاز باید بین  0 و 6 باشد')
         else:
             super().save_model(request, obj, form, change)
 

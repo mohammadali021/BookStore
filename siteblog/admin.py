@@ -10,4 +10,5 @@ from siteblog.models import SiteBlog
 @admin.register(SiteBlog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ['title','slug3']
-    prepopulated_fields = {'slug3':('token',)}
+    # prepopulated_fields = {'slug3':('token',)}
+    readonly_fields = ['slug3']

@@ -1,7 +1,13 @@
+import secrets
+import string
+
+import shortuuid
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Model
 from django.utils.text import slugify
+from django.utils.crypto import get_random_string
+from django.apps import apps
 
 
 class Category(models.Model):
@@ -11,6 +17,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     def save(self, *args, **kwargs):
+
         if not self.slug:
             self.slug = slugify(str(self.name))
         super().save(*args, **kwargs)
@@ -19,6 +26,7 @@ class Category(models.Model):
         verbose_name_plural = 'نوع دسته بندی کتاب'
 
 class Product(models.Model):
+
     category = models.ForeignKey(Category, on_delete=models.CASCADE , verbose_name='دسته بندی')
     name = models.CharField(max_length=100 , verbose_name='نام کتاب')
     price = models.DecimalField(max_digits=10 , decimal_places=0 , verbose_name='قیمت')
@@ -35,13 +43,17 @@ class Product(models.Model):
     Inventory = models.BooleanField(default=True  , verbose_name='موجودی')
     count = models.IntegerField(default=0)
     image = models.ImageField(upload_to='products/', null=True, blank=True)
-    slug = models.SlugField(unique=True , db_index=True , null=True, blank=True , allow_unicode=True)
+    slug = models.SlugField(db_index=True , null=True, blank=True)
+    # token = models.CharField(max_length=6, blank=True,null=True)
 
     def __str__(self):
         return self.name
     def save(self, *args, **kwargs):
+
         if not self.slug:
-            self.slug = slugify(f"{str(self.name)}-{str(self.price)}")
+            self.slug = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(6))
+            while Product.objects.filter(slug=self.slug).exists():
+                self.slug = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(6))
         self.unfill_score = 6-self.score
         super().save(*args, **kwargs)
 
