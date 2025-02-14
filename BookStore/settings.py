@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'tinymce',
     'django_quill',
     'siteblog',
-    'django_extensions'
+    
 
 ]
 TINYMCE_DEFAULT_CONFIG = {

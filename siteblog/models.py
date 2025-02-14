@@ -1,10 +1,8 @@
 import secrets
 import string
 
-import shortuuid
+
 from django.db import models
-from django.utils.crypto import get_random_string
-from django.utils.text import slugify
 from django_quill.fields import QuillField
 from django.apps import apps
 

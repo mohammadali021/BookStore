@@ -79,8 +79,8 @@
         <div class="swiper featured-slider">
 
             <div class="swiper-wrapper">
-                {% for Item in books %}
-                    {% if Item.best_book %}
+                {% for Item in bestbook %}
+                    <!-- {% if Item.best_book %} -->
                         <div class="swiper-slide box">
                             <div class="image">
                                 <img src="media/{{ Item.image }}" alt="">
@@ -117,7 +117,7 @@
                             </div>
                         </div>
 
-                    {% endif %}
+                    <!-- {% endif %} -->
 
                 {% endfor %}
             </div>
@@ -133,8 +133,8 @@
         <div class="swiper arrivals-slider">
 
             <div class="swiper-wrapper">
-                {% for book in books %}
-                    {% if book.new_book == True %}
+                {% for book in newbook %}
+                    <!-- {% if book.new_book == True %} -->
 
                         <a href="#" class="swiper-slide box">
                             <div class="image">
@@ -163,7 +163,7 @@
                                 </div>
                             </div>
                         </a>
-                    {% endif %}
+                    <!-- {% endif %} -->
                 {% endfor %}
     </section>
 
