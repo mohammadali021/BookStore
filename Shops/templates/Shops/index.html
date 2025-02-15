@@ -113,7 +113,7 @@
                                 </div>
 
 
-                                <a href="#" class="btn">اضافه کردن به سبد خرید</a>
+                                <a href="{% url 'book_info' slug=Item.slug %}" class="btn">اضافه کردن به سبد خرید</a>
                             </div>
                         </div>
 
@@ -136,17 +136,17 @@
                 {% for book in newbook %}
                     <!-- {% if book.new_book == True %} -->
 
-                        <a href="#" class="swiper-slide box">
+                        <a href="{% url 'book_info' slug=book.slug %}" class="swiper-slide box" style="text-decoration: none">
                             <div class="image">
                                 <img src="media/{{ book.image }}" alt="">
                             </div>
                             <div class="content">
                                 <h3>{{ book.name }}</h3>
                                 {% if book.discount %}
-                                    <div class="price">{{ book.price }} هزارتومان <span>{{ book.discount_price }} هزارتومان</span>
+                                    <div class="price" style="font-size: 20px">{{ book.price }} هزارتومان <span><br>{{ book.discount_price }} هزارتومان</span>
                                     </div>
                                 {% else %}
-                                    <div class="price">{{ book.price }} هزارتومان</div>
+                                    <div class="price" style="font-size: 20px">{{ book.price }} هزارتومان</div>
 
                                 {% endif %}
                                 <div class="stars">
@@ -206,7 +206,7 @@
                 </div>
                 <div class="content">
                     <h3>{{ blog.title}}</h3>
-                    <a href="{% url 'blog' slug=blog.slug3 %}" class="btn" id="card_btn">مطالعه بیشتر</a>
+                    <a href="{% url 'blog' slug=blog.slug %}" class="btn" id="card_btn">مطالعه بیشتر</a>
                 </div>
             </div>
             {% endfor %}

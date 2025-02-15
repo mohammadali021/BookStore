@@ -68,10 +68,3 @@ class Site_banner(models.Model):
     class Meta:
         verbose_name = "تصاویر کتب بنر"
         verbose_name_plural = "تصاویر کتب بنر"
-
-
-
-
-
-
-

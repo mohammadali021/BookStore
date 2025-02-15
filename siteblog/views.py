@@ -11,7 +11,7 @@ from siteblog.models import SiteBlog
 
 def index(request , slug , title=None):
 
-    post = get_object_or_404(SiteBlog, slug3=slug)
+    post = get_object_or_404(SiteBlog, slug=slug)
     if title:
         if post.title != title:
             return HttpResponse(request , '404ss')

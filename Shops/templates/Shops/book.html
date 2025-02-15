@@ -1,39 +1,142 @@
 {% extends 'Base.html' %}
 {% load static %}
 
-{% block content_block %}
 
+{#    <div class="bardia"#}
+{#         style="background-color: #f2f2f2; text-align: right; width: 88%; max-width: 1000px; padding: 20px; border-radius: 50px; margin: 0 auto;margin-top: 90px;box-shadow: -8px -8px 8px rgba(33, 145, 80, 0.5);">#}
 
-    <div class="bardia" style="background-color: #f2f2f2; text-align: right; width: 88%; max-width: 1000px; padding: 20px; border-radius: 50px; margin: 0 auto; display: block;margin-top: 90px;box-shadow: -8px -8px 8px rgba(33, 145, 80, 0.5);" >
-        <br>
-        <br>
-        <br>
+{#{% for item in book %}#}
+{#    <div>#}
+{#        <!-- تصویر کتاب -->#}
+{#        <div>#}
+{#            <img src="{{ item.image.url }}" alt=""#}
+{#                 style="width: 200px; height:300px; object-fit: cover; border-radius: 8px;">#}
+{#        </div>#}
 
-
+<!-- اطلاعات محصول -->
+<div>
+    <h1 style="text-align: right; font-size: 35px; font-weight: bold; color: #333;">{{ item.name }}</h1>
+    <div style="margin-top: 15px; font-size: 14px; color: #555;">
+        <strong style="font-size: 25px;">اطلاعات محصول:</strong>
+        <p style="font-size: 21px;">
+            {% if item.discount %}
+                قیمت:
+                <span style="font-size: 15px; text-decoration: line-through; color: red;">{{ item.price }}</span>
+                &nbsp;تومان<br>
+                قیمت پس از تخفیف:
+                <span style="font-size: 15px; color: green; font-weight: bold;">{{ item.discount_price }}</span>
+                &nbsp;تومان<br>
+            {% else %}
+                قیمت:
+                <span style="font-size: 15px;">{{ item.price }}</span>
+                &nbsp;تومان<br>
+            {% endif %}
+            دسته‌بندی: <span>{{ item.category }}</span><br>
+            نویسنده: <span style="color: #444;">{{ item.writer_name }}</span><br>
+            {% if item.is_translator %}
+                مترجم: <span>{{ item.translator }}</span><br>
+            {% endif %}
+            {% if item.Inventory == False %}
+                <span style="color: red; font-weight: bold;">موجود نیست</span><br>
+            {% endif %}
+        </p>
     </div>
 </div>
+</div>
+<div style="margin-top: 10px; font-size: 15px; color: #777; line-height: 1.5;width: 100%;"><br>
+    <strong style="color: #222;font-size: 25px">توضیحات:</strong>
+    <p style="text-align: justify;">{{ item.description }}</p>
+</div>
+{#{% endfor %}#}
+
+<div style="margin-top: 15px; width: 200px; padding: 10px; background-color: #28a745; color: white; text-align: center; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background-color 0.3s;"
+     onmouseover="this.style.backgroundColor='#218838'"
+     onmouseout="this.style.backgroundColor='#219150'">افزودن به سبد خرید
+</div>
+
+
+
+
+{% block content_block %}
+    <div class="bardia"
+         style="background-color: #f2f2f2; text-align: right; width: 88%; max-width: 1000px; padding: 20px; border-radius: 50px; margin: 0 auto; display: block;margin-top: 90px;box-shadow: -8px -8px 8px rgba(33, 145, 80, 0.5);">
+        <div class="mb-3" style=" direction: rtl;">
+            <div class="row g-0">
+                <div class="col-md-3">
+                    {% for item in book %}
+                        <img src="{{ item.image.url }}" class="img-fluid rounded-start" alt="..."
+                             style="width: 200px; height:300px; object-fit: cover; border-radius:5px;">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="text-end">
+                                <h1 class="card-title" style="font-size: 35px; font-weight: bold;">{{ item.name }}</h1>
+                                <p class="card-text">
+                                    <br>
+                                    <strong style="font-size: 20px;">اطلاعات محصول:</strong>
+                                <p style="font-size: 21px;">
+                                    {% if item.discount %}
+                                        قیمت:
+                                        <span style="font-size: 15px; text-decoration: line-through; color: red;">{{ item.price }}</span>
+                                        &nbsp;تومان<br>
+                                        قیمت پس از تخفیف:
+                                        <span style="font-size: 15px; color: green; font-weight: bold;">{{ item.discount_price }}</span>
+                                        &nbsp;تومان<br>
+                                    {% else %}
+                                        قیمت:
+                                        <span style="font-size: 15px;">{{ item.price }}</span>
+                                        &nbsp;تومان<br>
+                                    {% endif %}
+                                    دسته‌بندی: <span>{{ item.category }}</span><br>
+                                    نویسنده: <span style="color: #444;">{{ item.writer_name }}</span><br>
+                                    {% if item.is_translator %}
+                                        مترجم: <span>{{ item.translator }}</span><br>
+                                    {% endif %}
+                                    {% if item.Inventory == False %}
+                                        <span style="color: red; font-weight: bold;">موجود نیست</span><br>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+
+                        </div>
+                        <div class="col-md-12"
+                             style="margin-top: 10px; font-size: 15px; color: #777; line-height: 1.5;width: 100%;"><br>
+                            <strong style="color: #222;font-size: 25px">توضیحات:</strong>
+                            <p style="text-align: justify;">{{ item.description }}</p>
+                        </div>
+                    {% endfor %}
+            <br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <div  class="btn btn-success" style="margin-top: 15px; padding: 10px; color: white; text-align: center; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background-color 0.3s;"
+                 onmouseover="this.style.backgroundColor='#218838'"
+                 onmouseout="this.style.backgroundColor='#219150'">افزودن به سبد خرید
+            </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
-{% block javascript %}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const images = document.querySelectorAll('.ql-editor img');
 
-        images.forEach(img => {
-            img.style.maxWidth = '100%';
-            img.style.width = '600px';
-            img.style.height = 'auto';
-            img.style.display = 'block';
-            img.style.marginLeft = 'auto';
-            img.style.marginRight = 'auto';
-            img.style.borderRadius = '18px';
-            img.style.marginTop = '15px';
-            img.style.marginBottom = '15px';
+{% block javascript %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const images = document.querySelectorAll('.ql-editor img');
+
+            images.forEach(img => {
+                img.style.maxWidth = '100%';
+                img.style.width = '600px';
+                img.style.height = 'auto';
+                img.style.display = 'block';
+                img.style.marginLeft = 'auto';
+                img.style.marginRight = 'auto';
+                img.style.borderRadius = '18px';
+                img.style.marginTop = '15px';
+                img.style.marginBottom = '15px';
+            });
+            const textElements = document.querySelectorAll('.ql-editor p, .ql-editor div, .ql-editor span, .ql-editor h1, .ql-editor h2, .ql-editor h3');
+            textElements.forEach(element => {
+                element.style.lineHeight = '2'; // فاصله بین خطوط را ۲ برابر می‌کند (مقدار دلخواه)
+            });
         });
-        const textElements = document.querySelectorAll('.ql-editor p, .ql-editor div, .ql-editor span, .ql-editor h1, .ql-editor h2, .ql-editor h3');
-        textElements.forEach(element => {
-            element.style.lineHeight = '2'; // فاصله بین خطوط را ۲ برابر می‌کند (مقدار دلخواه)
-        });
-    });
-</script>
+    </script>
 {% endblock %}

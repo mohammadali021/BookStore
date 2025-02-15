@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
+import Shops
 from Shops.models import Site_banner, Product
 from siteblog.models import SiteBlog
 
@@ -14,5 +15,7 @@ def index(request):
     return render(request, 'Shops/index.html' , {'banner_img':all_banner_img 
                                                   , 'blog':all_blogs , 'newbook':New_book ,'bestbook':Best_books})
 
-def book_view(request):
-    return render(request , 'Shops/book.html')
+def book_view(request , slug):
+    # book = get_object_or_404(SiteBlog, slug=slug)
+    book = Product.objects.filter(slug=slug)
+    return render(request , 'Shops/book.html', {'book':book})
