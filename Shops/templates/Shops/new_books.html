@@ -1,0 +1,75 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block content_block %}
+    <div class="bardia"
+         style="background-color: #f2f2f2; text-align: right; width: 88%; max-width: 1000px; padding: 20px; border-radius: 50px; margin: 0 auto; display: block;margin-top: 90px;box-shadow: -8px -8px 8px rgba(33, 145, 80, 0.5);">
+
+        <div class="row">
+            {% for item in newbook %}
+                <div class="col-md-6 mb-4 d-flex justify-content-center">
+                    <div class="card" style="width: 100%; max-width: 290px; height: 500px;">
+                        <img class="card-img-top image" src="{{ item.image.url }}" alt="Card image cap"
+                             style="height: 30rem;font-size: 2.2rem;">
+                        <div class="card-body">
+                            {#                            <h3 class="card-title" style="text-align: center">{{ item.name }}</h3>#}
+                            <div class="content" style="text-align: center">
+                                <h3>{{ item.name }}</h3>
+                                {% if item.discount %}
+                                    قیمت :
+                                    <span style="font-size: 15px; text-decoration: line-through; color: red;">{{ item.price }}</span>
+                                    &nbsp;تومان<br>
+                                    قیمت پس از تخفیف:
+                                    <span style="font-size: 15px; color: green; font-weight: bold;">{{ item.discount_price }}</span>
+                                    &nbsp;تومان<br>
+                                {% else %}
+                                    قیمت:
+                                    <span style="font-size: 15px;">{{ item.price }}</span>
+                                    &nbsp;تومان<br>
+
+                                {% endif %}
+                                <div class="stars" style="color: gold">
+                                    {% with ''|center:item.score as range %}
+                                        {% for star in range %}
+                                            <i class="fas fa-star"></i>
+                                        {% endfor %}
+                                    {% endwith %}
+                                    {% with ''|center:item.unfill_score as range %}
+                                        {% for star in range %}
+                                            <i class="far fa-star"></i>
+                                        {% endfor %}
+                                    {% endwith %}
+                                </div>
+                            </div>
+                            <a href="{% url 'book_info' slug=item.slug %}" class="btn btn-primary" id="card_btn">مطالعه
+                                بیشتر</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">مقاله‌ای پیدا نشد.</p>
+            {% endfor %}
+        </div>
+
+        {#        <nav aria-label="..." class="d-flex justify-content-center mt-4">#}
+        <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4" style="direction: ltr">
+            <ul class=" pagination pagination-lg rtl">
+                {% if newbook.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ newbook.previous_page_number }}">قبلی</a>
+                    </li>
+                {% endif %}
+                {% for page in newbook.paginator.page_range %}
+                    {% if newbook.number == page %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if newbook.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ newbook.next_page_number }}">بعدی</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block content_block %}
+    <div class="bardia"
+         style="background-color: #f2f2f2; text-align: right; width: 88%; max-width: 1000px; padding: 20px; border-radius: 50px; margin: 0 auto; display: block;margin-top: 90px;box-shadow: -8px -8px 8px rgba(33, 145, 80, 0.5);">
+
+        <div class="row">
+            {% for item in blog %}
+                <div class="col-md-6 mb-4 d-flex justify-content-center">
+                    <div class="card" style="width: 100%; max-width: 390px; height: 340px;">
+                        <img class="card-img-top" src="{{ item.image.url }}" alt="Card image cap"
+                             style="height: 200px; object-fit: cover;font-size: 2.2rem;">
+                        <div class="card-body">
+                            <h3 class="card-title" style="text-align: center">{{ item.title }}</h3>
+                            <a href="{% url 'blog' slug=item.slug %}" class="btn btn-primary" id="card_btn">مطالعه
+                                بیشتر</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">مقاله‌ای پیدا نشد.</p>
+            {% endfor %}
+        </div>
+
+        {#        <nav aria-label="..." class="d-flex justify-content-center mt-4">#}
+<nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4" style="direction: ltr">
+  <ul class=" pagination pagination-lg">
+      {% if blog.has_previous %}
+      	<li class="page-item"><a class="page-link" href="?page={{ blog.previous_page_number}}">قبلی</a></li>
+      {% endif %}
+    {% if blog.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ blog.next_page_number}}">بعدی</a></li>
+    {% endif %}
+    {% for page in blog.paginator.page_range %}
+    	{% if blog.number == page %}
+    		<li class="page-item"><a class="page-link" href="?page={{page}}">{{page }}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{page}}">{{page }}</a></li>
+    	{% endif %}
+    {% endfor %}
+  </ul>
+</nav>
+
+    </div>
+{% endblock %}

@@ -46,9 +46,9 @@
             <nav class="navbar navbar-expand-lg bg-success justify-content-center ">
                 <a href="{% url 'home' %}" style="text-decoration: none" class='col-md-2'>خانه</a>
                 <a href="#featured"  style="text-decoration: none" class='col-md-2'>ویژه</a>
-                <a href="#arrivals"  style="text-decoration: none" class='col-md-2'>جدیدها</a>
+                <a href="{% url 'new_book' %}"  style="text-decoration: none" class='col-md-2'>جدیدها</a>
                 <a href="#reviews"  style="text-decoration: none" class='col-md-2'>نظرات</a>
-                <a href="#blogs"  style="text-decoration: none" class='col-md-2'>وبلاگ</a>
+                <a href="{% url 'blog_page'%}"  style="text-decoration: none" class='col-md-2'>وبلاگ</a>
             </nav>
         </div>
 
@@ -117,10 +117,10 @@
             <div class="box">
                 <h3>میانبر</h3>
                 <a href="{% url 'home' %}"> <i class="fas fa-arrow-right"></i> خانه </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> ویژه </a>
+                <a href="{% url 'new_book' %}"> <i class="fas fa-arrow-right"></i> جدید </a>
                 <a href="#"> <i class="fas fa-arrow-right"></i> برجسته </a>
                 <a href="#"> <i class="fas fa-arrow-right"></i> نظرات </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> وبلاگ </a>
+                <a href="{% url 'blog_page' %}"> <i class="fas fa-arrow-right"></i> وبلاگ </a>
             </div>
 
 

@@ -25,7 +25,7 @@ class SiteBlog(models.Model):
     def save(self,*args,**kwargs):
         if not self.slug:
             self.slug = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(6))
-            while Product.objects.filter(slug=self.slug).exists():
+            while SiteBlog.objects.filter(slug=self.slug).exists():
                 self.slug = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(6))
         return super().save(*args , **kwargs)
     class Meta:
