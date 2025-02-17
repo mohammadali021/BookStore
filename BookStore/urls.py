@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from BookStore import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls , name='admin'),
     path('', include('Shops.urls')),
     path('blog/' , include('siteblog.urls')),
     path('tinymce/' , include('tinymce.urls'))
