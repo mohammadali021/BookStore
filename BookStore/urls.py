@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls , name='admin'),
     path('', include('Shops.urls')),
     path('blog/' , include('siteblog.urls')),
-    path('tinymce/' , include('tinymce.urls'))
+    path('register/' , include('users.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

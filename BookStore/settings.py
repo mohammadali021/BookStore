@@ -40,29 +40,26 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Shops',
-    'tinymce',
     'django_quill',
+    'ckeditor',
+    'ckeditor_uploader',
+    'users',
     'siteblog',
-    
-
 ]
-TINYMCE_DEFAULT_CONFIG = {
-    'height': 500,  # ارتفاع ویرایشگر
-    'width': '80%',  # عرض ویرایشگر
-    'menubar': True,
-    'plugins': 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-    'toolbar': 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
-    'cleanup_on_startup': False,
-    'custom_undo_redo_levels': 10,
+CKEDITOR_BASEPAHT = 'static/ckeditor/ckeditor/'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+        'extraPlugins': ','.join([
+            'uploadimage',  # برای آپلود مستقیم تصویر
+            'image2',       # قابلیت ویرایش و تغییر اندازه تصویر
+        ]),
+        'filebrowserUploadUrl': "/ckeditor/upload/",  # مسیر آپلود فایل
+        'filebrowserUploadMethod': "form",  # روش ارسال فرم
+    },
 }
 
-# CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor'
-# CKEDITOR_UPLOAD_PATH = 'uploads/'
-# CKEDITOR_CONFIGS={
-#     'default':{
-#         'toolbar':'full'
-#     }
-# }
 
 
 MIDDLEWARE = [
@@ -143,16 +140,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR/'static'
+STATIC_URL = '/static/'
+STATIC_ROOT = 'static/',
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'your_app/static'),
-# ]
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_COOKIE_AGE = 1209600
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+
+

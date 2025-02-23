@@ -40,7 +40,7 @@
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-shopping-cart"></a>
                 {% if user.is_authenticated %}
-                    <div id="login-btn" class="fas fa-sign-out-alt" ></div>
+                    <a href="{% url 'logout' %}"><div id="login-btn" class="fas fa-sign-out-alt" ></div></a>
                     {% else %}
                 <div id="login-btn" class="fas fa-user"></div>
                 {% endif %}
@@ -97,12 +97,12 @@
             <span>رمز عبور</span>
             <input type="password" name="password" class="box" placeholder="رمز عبور خود را وارد کنید" id="">
             <div class="checkbox">
-                <input type="checkbox" name="" id="remember-me">
+                <input type="checkbox" name="remember_me" id="remember-me">
                 <label for="remember-me"> به خاطر سپردن</label>
             </div>
             <input type="submit" value="ورود" class="btn">
             <p>رمز خود را فراموش کرده اید ؟ <a href="#">اینجا کلیک کنید</a></p>
-            <p>ثبت نام نکرده اید ؟ <a href="#">ساخت حساب</a></p>
+            <p>ثبت نام نکرده اید ؟ <a href="{% url 'register' %}">ساخت حساب</a></p>
         </form>
 
     </div>

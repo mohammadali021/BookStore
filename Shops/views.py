@@ -43,13 +43,20 @@ def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+        remember_me = request.POST.get('remember_me')
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
             messages.success(request, 'ورود موفقیت آمیز بود')
+
+            if remember_me:
+                request.session.set_expiry(1209600)
+            else:
+                request.session.set_expiry(0)
             if username=='admin':
                 return redirect('admin:index')
+
             return redirect('home')
         else:
             messages.error(request , 'لطفا ابتدا در سایت ثبت نام نمایید ')
