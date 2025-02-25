@@ -4,11 +4,12 @@ from idlelib.iomenu import errors
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
-from users.forms import RegisterForm
-
+from users.forms import RegisterForm, EditInfo
+from users.models import UserPannel
 
 
 def register(request):
@@ -72,6 +73,60 @@ def register(request):
 
 
 
+def dashboard(requests , slug):
+
+    pannel = get_object_or_404(UserPannel , slug=slug)
+    path = r'/media/aaaa.jpg'
+    return render(requests , 'users/Pannel.html' , {'pannel':pannel , 'default_img':path})
 
 
-# Create your views here.
+def edit_profile(request):
+    errors = []
+    edit = EditInfo()
+    if request.method == 'POST':
+        edit = EditInfo(instance=request.user)
+        if edit.is_valid():
+            first_name = edit.cleaned_data['first_name']
+            last_name = edit.cleaned_data['last_name']
+            email = edit.cleaned_data['email']
+            username = edit.cleaned_data['username']
+
+#             اعتبار سنجی
+            if User.objects.filter(email=email).exists():
+                errors.append("کاربر با این ایمیل در سایت وجود دارد")
+            if User.objects.filter(username=username).exists():
+                errors.append("نام کاربری تکراری است")
+                # کنترل فارسی بودن first_name , last_name
+
+            farsi_pattern = r'^[\u0600-\u06FF\s]+$'
+            if not re.match(farsi_pattern, first_name):
+                errors.append("نام باید فارسی وارد شود")
+            if not re.match(farsi_pattern, last_name):
+                errors.append("نام خانوادگی باید فارسی وارد شود")
+
+            # کنترل انگلیسی بودن username
+
+            english_pattern = r'.*[A-Za-z].*'
+            if not re.match(english_pattern, username):
+                errors.append("نام کاربری باید انگلیسی و شامل اعداد باشد")
+
+            if not errors:
+                user = User.objects.get(id=request.user.id)
+                user.first_name = first_name
+                user.last_name = last_name
+                user.email = email
+                user.username= username
+                user.save()
+                return JsonResponse({"status": "success", "message": "اطلاعات با موفقیت ویرایش شد."})
+        return JsonResponse({"status": "error", "errors": edit.errors})
+
+    return render(request,'users/edit_form.html' , {'form':edit , 'errors': errors})
+
+
+
+
+
+
+
+
+

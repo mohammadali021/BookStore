@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Shops',
     'django_quill',
-    'ckeditor',
-    'ckeditor_uploader',
     'users',
     'siteblog',
 ]

@@ -1,0 +1,98 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block content_block %}
+    <div class="bardia"
+         style="background-color: #f2f2f2; text-align: right; width: 88%; max-width: 1000px; padding: 20px; border-radius: 50px; margin: 0 auto; display: block;margin-top: 90px;box-shadow: -8px -8px 8px rgba(33, 145, 80, 0.5);">
+        <div class="d-flex">
+            <!-- Sidebar -->
+            <div class=" col-md-4" style="width: 250px;background-color: #f9f9f9;border-radius: 10px">
+                <h4 class="nav flex-column" style="text-align: center;font-size: 18px"><b>پنل مدیریت</b></h4>
+                <ul>
+                    <li class="nav-item"
+                        style="border: solid 1px #27ae6094;width: 250px;margin-top: 15px;border-radius: 5px; ">
+                        <a onmouseover="this.style.backgroundColor='#27ae6094';"
+                           onmouseout="this.style.backgroundColor='';"
+                           class="nav-link" style="text-align: center;font-size: 15px" href="#"
+                           onclick="showContent('home')">خانه</a>
+                    </li>
+                    <li class="nav-item"
+                        style="border: solid 1px #27ae6094;width: 250px;border-radius: 5px; ">
+                        <a onmouseover="this.style.backgroundColor='#27ae6094';"
+                           onmouseout="this.style.backgroundColor='';"
+                           class="nav-link" style="text-align: center;font-size: 15px" href="#"
+                           onclick="showContent('articles')">مقالات</a>
+                    <li class="nav-item"
+                        style="border: solid 1px #27ae6094;width: 250px;border-radius: 5px; ">
+                        <a onmouseover="this.style.backgroundColor='#27ae6094';"
+                           onmouseout="this.style.backgroundColor='';"
+                           class="nav-link" style="text-align: center;font-size: 15px" href="#"
+                           onclick="showContent('users')">ویرایش اطلاعات</a>
+                </ul>
+            </div>
+            <div class="container-fluid">
+                <div class="content" id="main-content"
+                     style="padding: 20px; border: 1px solid #ddd; background-color: #f9f9f9;margin-top: 5px">
+                    <h2>اطلاعات کاربری</h2>
+                    <br>
+                    {% if pannel.image %}
+                    	<img src="{{ pannel.image.url}}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+                        {% else %}
+                        <img src='{% get_media_prefix %}profile/avatar.jpg' alt="" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+
+                    {% endif %}
+
+
+                    <br>
+                    <h3> نام : {{ pannel.user.first_name }}</h3>
+                    <h3> نام خانوادگی : {{ pannel.user.last_name }}</h3>
+                    <h3> ایمیل : {{ pannel.user.email }}</h3>
+                    <h3> نام کاربری : {{ pannel.user.username }}</h3>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+<script>
+    function showContent(section) {
+        let content = document.getElementById("main-content");
+
+        if (section === 'home') {
+            content.innerHTML = "<h2>خانه</h2><p>به صفحه اصلی خوش آمدید.</p>";
+        } else if (section === 'articles') {
+            content.innerHTML = "<h2>مقالات</h2><p>لیست مقالات اینجا نمایش داده خواهد شد.</p>";
+        } else if (section === 'users') {
+            fetch("{% url 'edit_profile' %}")  // درخواست برای دریافت فرم
+                .then(response => response.text())
+                .then(html => {
+                    content.innerHTML = html;  // فرم را در صفحه نمایش بده
+                    setupFormSubmit();  // رویداد ثبت فرم را فعال کن
+                });
+        }
+    }
+
+    function setupFormSubmit() {
+        let form = document.getElementById("editProfileForm");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let formData = new FormData(form);
+            fetch("{% url 'edit_profile' %}", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert(data.message);
+                } else {
+                    alert("خطا در ذخیره اطلاعات");
+                }
+            });
+        });
+    }
+</script>
+{% endblock %}

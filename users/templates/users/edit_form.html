@@ -1,0 +1,35 @@
+{#{% extends 'Base.html' %}#}
+{% load static %}
+
+{% block content_block %}
+{#    <div class="bardia"#}
+{#         style="background-color: #f2f2f2; text-align: right; width: 88%; max-width: 1000px; padding: 20px; border-radius: 50px; display: block;margin-top: 90px;box-shadow: -8px -8px 8px rgba(33, 145, 80, 0.5);">#}
+        <div class="container">
+            <center>
+                <div class="col-md-5">
+                    <form method="POST" action="{% url 'edit_profile' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ form.as_p }}
+                        </div>
+                        <button type="submit" class="btn btn-success">ویرایش</button>
+                    </form>
+                    <br><br><br>
+                    {% if errors %}
+                        <div class="alert alert-danger" style="font-size: 15px;width: 300px">
+                            <ul>
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+
+                </div>
+            </center>
+        </div>
+
+{#    </div>#}
+
+{% endblock %}
